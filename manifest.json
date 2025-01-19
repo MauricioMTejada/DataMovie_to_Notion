@@ -1,41 +1,43 @@
 {
-    "manifest_version": 3,
-    "name": "Data Movie To Notion",
-    "version": "1.0",
-    "description": "Captura datos de películas y series de páginas web y envíalos a una tabla en Notion.",
-    "permissions": ["activeTab", "scripting"],
-    "host_permissions": [
-      "https://www.imdb.com/*",
-      "https://www.themoviedb.org/*",
-      "https://www.filmaffinity.com/ar/*"
-    ],
-    "content_scripts": [
-      {
-        "matches": ["*://*/*"],
-        "js": ["content.js"]
-      }
-    ],
-    "icons": {
-      "16": "proto-icon.ico",
-      "20": "proto-icon.ico",
-      "24": "proto-icon.ico",
-      "32": "proto-icon.ico",
-      "40": "proto-icon.ico",
-      "48": "proto-icon.ico",
-      "64": "proto-icon.ico",
-      "256": "proto-icon.ico"
-    },
-    "action": {
-      "default_popup": "popup.html",
-      "default_icon": {
-        "16": "proto-icon.ico",
-        "20": "proto-icon.ico",
-        "24": "proto-icon.ico",
-        "32": "proto-icon.ico",
-        "40": "proto-icon.ico",
-        "48": "proto-icon.ico",
-        "64": "proto-icon.ico",
-        "256": "proto-icon.ico"
-      }
+  "manifest_version": 3,
+  "name": "Data Movie To Notion",
+  "version": "1.0",
+  "description": "Captura datos de películas y series de páginas web y envíalos a una tabla en Notion.",
+  "permissions": ["activeTab", "scripting"],
+  "host_permissions": [
+    "https://www.imdb.com/*",
+    "https://www.themoviedb.org/*",
+    "https://www.filmaffinity.com/ar/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "icons": {
+    "16": "icons/proto-icon.png",
+    "20": "icons/proto-icon.png",
+    "24": "icons/proto-icon.png",
+    "32": "icons/proto-icon.png",
+    "40": "icons/proto-icon.png",
+    "48": "icons/proto-icon.png",
+    "64": "icons/proto-icon.png",
+    "128": "icons/proto-icon.png",
+    "256": "icons/proto-icon.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/proto-icon.png",
+      "20": "icons/proto-icon.png",
+      "24": "icons/proto-icon.png",
+      "32": "icons/proto-icon.png",
+      "40": "icons/proto-icon.png",
+      "48": "icons/proto-icon.png",
+      "64": "icons/proto-icon.png",
+      "128": "icons/proto-icon.png",
+      "256": "icons/proto-icon.png"
     }
   }
+}

@@ -1,5 +1,5 @@
 // Detecta el dominio actual y ejecuta la lógica específica
-(function () {
+function extractData() {
     const url = window.location.href;
 
     if (url.includes("www.imdb.com")) {
@@ -84,4 +84,4 @@
 
         console.log(data);
     }
-  })();
+  }
