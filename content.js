@@ -1,7 +1,5 @@
 // Detecta el dominio actual y ejecuta la lógica específica
 (function () {
-    console.log("content.js se está ejecutando");
-    console.log("Función anónima de content.js ejecutándose");
     const url = window.location.href;
 
     if (url.includes("www.imdb.com")) {
@@ -13,8 +11,7 @@
       // Lógica específica para The Movie Database
       tmdbHandler();
     } else if (url.includes("www.filmaffinity.com/ar")) {
-      console.log("Estás en FilmAffinity (Argentina).");
-      // Lógica específica para FilmAffinity
+      console.log("Estás en FilmAffinity (Argentina). Extrayendo datos...");
       filmAffinityHandler();
     } else {
       console.log("Ésta no ninguna página a implementar mi código");
@@ -34,7 +31,57 @@
 
     // Función para manejar FilmAffinity
     function filmAffinityHandler() {
-      console.log("Ejecutando código específico para FilmAffinity...");
-      // Aquí puedes añadir tu lógica para extraer datos de FilmAffinity
+        const el = document.querySelector('#mt-content-cell');
+        if (!el) {
+            console.error("No se encontró el elemento #mt-content-cell");
+            return;
+        }
+
+        // Helper function to find dt by text content and get next dd
+        const getDtDdValue = (dtText) => {
+            const dtElements = Array.from(el.querySelectorAll('.movie-info dt'));
+            const targetDt = dtElements.find(dt => dt.textContent.trim() === dtText);
+            if (targetDt) {
+                const nextDd = targetDt.nextElementSibling;
+                if (nextDd) {
+                    // Elimina elementos adicionales como "aka" si existen
+                    const clone = nextDd.cloneNode(true);
+                    clone.querySelectorAll('.show-akas, .akas').forEach(node => node.remove());
+                    return clone.textContent.trim();
+                }
+            }
+            return '';
+        };
+
+        const titulo = el.querySelector('h1 span[itemprop="name"]')?.innerText || '';
+        const tituloOriginal = getDtDdValue('Título original');
+        const año = getDtDdValue('Año');
+        const pais = getDtDdValue('País').replace(/^\s*\n\s*/, ''); // Limpia espacios/saltos
+        const bandera = el.querySelector('#country-img img')?.getAttribute('src') || '';
+
+        const direccion = getDtDdValue('Dirección');
+        const reparto = Array.from(el.querySelectorAll('.card-cast .cast-wrapper')).map(cast => cast.textContent.trim()).join(', ');
+        const companias = Array.from(el.querySelectorAll('.card-producer .credits a')).map(company => company.textContent.trim()).join(', ');
+        const genero = Array.from(el.querySelectorAll('.card-genres a')).map(genre => genre.textContent.trim()).join(', ');
+        const sinopsis = el.querySelector('.movie-info dd[itemprop="description"]')?.innerText.trim() || '';
+
+        // Enlace de la imagen
+        const imagen = el.querySelector('#movie-main-image-container img')?.getAttribute('src') || '';
+
+        const data = {
+            Título: titulo,
+            "Título original": tituloOriginal,
+            Año: año,
+            País: pais,
+            Bandera: bandera,
+            Dirección: direccion,
+            Reparto: reparto,
+            Compañías: companias,
+            Género: genero,
+            Sinopsis: sinopsis,
+            Imagen: imagen
+        };
+
+        console.log(data);
     }
   })();
