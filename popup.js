@@ -49,7 +49,9 @@ document.addEventListener("DOMContentLoaded", () => {
         {
           target: { tabId: tabs[0].id },
           func: () => {
-            extractData();
+            // Extraer los datos y guardarlos en CSV
+            const data = extractData();  // Asumir que extractData devuelve los datos
+            saveToCSV([data]);
           },
         }
       );
